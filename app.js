@@ -12,6 +12,9 @@ var leaderRouter = require('./routes/leaderRouter');
 
 var app = express();
 
+var Dishes = require('./models/dishes');
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
