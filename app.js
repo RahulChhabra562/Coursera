@@ -14,6 +14,16 @@ var app = express();
 
 var Dishes = require('./models/dishes');
 
+const mongoose = require('mongoose');
+const url = 'mongodb+srv://mongouser:Rahul123@cluster0-lbzsd.mongodb.net/coursera?retryWrites=true&w=majority';
+
+const connect = mongoose.connect(url,  { useNewUrlParser: true });
+
+
+connect.then((db) => {
+  console.log("Connected correctly to the server");
+}, (err) => {console.log(err);});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
