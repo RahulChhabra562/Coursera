@@ -97,7 +97,7 @@ dishRouter.route('/:dishId/comments')
             res.setHeader('Content-Type', 'application/json');
             res.json(dish.comments);
         }
-        else {
+        else  {
             err = new Error('Dish ' + req.params.dishId + ' not found');
             err.status = 404;
             return next(err);
