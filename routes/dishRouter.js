@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+var authenticate = require('../authenticate');
 
 const dishRouter = express.Router();
 
@@ -8,7 +9,7 @@ const Dishes = require('../models/dishes');
 dishRouter.use(bodyParser.json())
 
 dishRouter.route('/')
-.get((req, res, next) => {
+.get(authenticate.verifyUser, (req, res, next) => {
     Dishes.find({})
     .then((dishes) => {
         res.statusCode = 200;
@@ -18,7 +19,7 @@ dishRouter.route('/')
     .catch((err) => next(err));
 })
 
-.post((req, res, next) => {
+.post(authenticate.verifyUser, (req, res, next) => {
     Dishes.create(req.body)
     .then((dish) => {
         res.statusCode = 200;
@@ -29,12 +30,12 @@ dishRouter.route('/')
 })
 
 
-.put((req, res, next) => {
+.put(authenticate.verifyUser, (req, res, next) => {
     res.statusCode = 403;
     res.end('PUT operation is not supported');
 })
 
-.delete((req, res, next) => {
+.delete(authenticate.verifyUser, (req, res, next) => {
     Dishes.remove({})
     .then((resp) => {
         res.statusCode = 200;
